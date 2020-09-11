@@ -9,3 +9,6 @@ Work in progres...JS/Vue/Node/async
 -change convert to allow files from browser
 
 Essential: node/ES6/npm install fs, jest
+
+TEST:
+npm test
