@@ -12,3 +12,14 @@ Essential: node/ES6/npm install fs, jest
 
 TEST:
 npm test
+
+Vue
+yarn global add @vue/cli // choose 2
+
+Vue bootstrap
+yarn add bootstrap-vue bootstrap
+
+RUN SERVE
+yarn serve
+
+TEST browsify
