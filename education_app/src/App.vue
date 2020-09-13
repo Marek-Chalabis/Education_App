@@ -23,10 +23,10 @@ import questionView from "./components/questionView.vue";
 import FileReader from "./components/fileReader";
 export default {
   name: "App",
-  //TODO dodać vuex i polączyć to gówno ze sobą
+  //TODO dodać vuex i polączyć to ze sobą
   data() {
     return {
-      text: "",
+      text: "", // wywalic
     };
   },
   components: {

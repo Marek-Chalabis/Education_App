@@ -5,10 +5,8 @@
 </template>
 
 <script>
+import store from "@/store";
 export default {
-  data() {
-    return { questionsInJSONFormat: "" };
-  },
   methods: {
     loadTextFromFile(ev) {
       const complete_file = {};
@@ -24,8 +22,8 @@ export default {
           complete_file[file.name.replace(".txt", "")] = questionsInJSON;
         };
       }
-      this.questionsInJSONFormat = complete_file;
-      console.log("To zwróci", this.questionsInJSONFormat);
+      store.commit("changeQuestions", complete_file);
+      console.log("PO zmienia", store.state.questionsFromTxtFile);
     },
     convertJSONtoTXT(data) {
       const listQuestions = [];
