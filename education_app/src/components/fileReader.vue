@@ -1,18 +1,32 @@
 <template>
-  <label class="text-reader">
-    <input type="file" multiple="multiple" @change="loadTextFromFile" />
-  </label>
+  <div>
+    <b-form-file
+      v-model="files"
+      multiple
+      accept=".txt"
+      size="lg"
+      :state="Boolean(files)"
+      placeholder="Choose a files or drop it here..."
+      drop-placeholder="Drop files here..."
+    ></b-form-file>
+  </div>
 </template>
 
 <script>
-import store from "@/store";
-export default {
-  methods: {
-    loadTextFromFile(ev) {
-      const complete_file = {};
-      const files = ev.target.files;
+import { mapActions } from "vuex";
 
-      for (let file of files) {
+export default {
+  data() {
+    return {
+      files: null,
+    };
+  },
+  methods: {
+    ...mapActions(["changeQuestionsFromTxtToJson"]),
+    loadTextFromFile() {
+      const complete_file = {};
+
+      for (let file of this.files) {
         const reader = new FileReader();
         reader.onload = (e) => this.$emit("load", e.target.result);
         reader.readAsText(file);
@@ -22,12 +36,11 @@ export default {
           complete_file[file.name.replace(".txt", "")] = questionsInJSON;
         };
       }
-      store.commit("changeQuestions", complete_file);
-      console.log("PO zmienia", store.state.questionsFromTxtFile);
+      this.changeQuestionsFromTxtToJson(complete_file);
     },
     convertJSONtoTXT(data) {
       const listQuestions = [];
-      const regEx = /[0-9]{1,3}. /;
+      const regEx = /0*[1-9][0-9]*. /;
       const array = data.split(regEx);
 
       for (const topic of array) {
@@ -42,6 +55,11 @@ export default {
           });
       }
       return listQuestions;
+    },
+  },
+  watch: {
+    files: function () {
+      this.loadTextFromFile();
     },
   },
 };
