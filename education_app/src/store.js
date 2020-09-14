@@ -1,18 +1,22 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {
-        questionsFromTxtFile: '',
+  state: {
+    questionsFromTxtFileInJsonFormat: {},
+  },
+  actions: {
+    changeQuestionsFromTxtToJson: ({
+      commit
+    }, newQuestions) => {
+      commit("ReplaceJsonQuestion", newQuestions);
     },
-    mutations: {
-        changeQuestions(state, newQuestions) {
-            state.questionsFromTxtFile = newQuestions
-        }
+  },
+  mutations: {
+    ReplaceJsonQuestion: (state, newQuestions) => {
+      state.questionsFromTxtFileInJsonFormat = newQuestions;
     },
-    actions: {
-
-    }
-})
+  },
+});
