@@ -1,0 +1,15 @@
+{
+    "B_testJSON": [{
+            "question": "B1-QestionSJON",
+            "answer": "B1-ODP"
+        },
+        {
+            "question": "B2-QestionSJON",
+            "answer": "B2-ODP"
+        },
+        {
+            "question": "B1-QestionSJON",
+            "answer": "B1-ODP"
+        }
+    ]
+}
