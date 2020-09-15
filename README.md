@@ -47,7 +47,7 @@ TODO
 
 ## TODO
 
-- fix bug: new line in answer is missing
+- ~~fix bug: new line in answer is missing~~
 - add possibility to upload question in JSON format
 - change paths and tests for BONUS files
 - add other readme with instructions for format text file
