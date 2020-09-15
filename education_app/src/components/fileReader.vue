@@ -3,7 +3,7 @@
     <b-form-file
       v-model="files"
       multiple
-      accept=".txt"
+      accept=".txt, .json"
       size="lg"
       :state="Boolean(files)"
       placeholder="Choose a files or drop it here..."
@@ -23,21 +23,42 @@ export default {
   },
   methods: {
     ...mapActions(["changeQuestionsFromTxtToJson"]),
-    loadTextFromFile() {
-      const complete_file = {};
+    async readFiles(file) {
+      const fullFileResult = await new Promise((resolve) => {
+        const fileReader = new FileReader();
+
+        fileReader.onload = (fileOpen) => {
+          if (file.name.endsWith(".txt")) {
+            let returnObject = {};
+            const questionsInJSON = this.convertTxtFileToJsonObject(
+              fileOpen.target.result
+            );
+            const category = file.name.replace(".txt", "");
+            returnObject[category] = questionsInJSON;
+            resolve(returnObject);
+          } else if (file.name.endsWith(".json"))
+            resolve(JSON.parse(fileOpen.target.result));
+        };
+        fileReader.readAsText(file);
+      });
+      return fullFileResult;
+    },
+    async loadTextFromFile() {
+      let promiseArray = [];
 
       for (let file of this.files) {
-        const reader = new FileReader();
-
-        reader.readAsText(file);
-        reader.onload = (fileObject) => {
-          let questionsInJSON = this.convertJSONtoTXT(fileObject.target.result);
-          complete_file[file.name.replace(".txt", "")] = questionsInJSON;
-        };
+        promiseArray.push(this.readFiles(file));
       }
-      this.changeQuestionsFromTxtToJson(complete_file);
+      let stop = Promise.all(promiseArray).then((values) => {
+        let allQuestions = {};
+
+        for (let result of values)
+          allQuestions = { ...result, ...allQuestions };
+        this.changeQuestionsFromTxtToJson(allQuestions);
+      });
+      await stop;
     },
-    convertJSONtoTXT(data) {
+    convertTxtFileToJsonObject(data) {
       const listQuestions = [];
       const regEx = /0*[1-9][0-9]*. /;
       const array = data.split(regEx);
@@ -53,7 +74,6 @@ export default {
             answer: answer,
           });
       }
-      console.log(listQuestions);
       return listQuestions;
     },
   },
