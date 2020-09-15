@@ -27,9 +27,7 @@
 
                   <hr class="my-4" />
 
-                  <div v-if="displayAnswer === true" id="answer">
-                    <p style="padding: 5px;">{{ currentQuestion.answer }}</p>
-                  </div>
+                  <div v-if="displayAnswer === true" id="answer">{{ currentQuestion.answer }}</div>
 
                   <b-button
                     variant="primary"
@@ -107,5 +105,8 @@ export default {
 #answer {
   border: 1px solid;
   text-align: left;
+  white-space: pre-wrap;
+  padding: 4px;
+  margin-bottom: 10px;
 }
 </style>

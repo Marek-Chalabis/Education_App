@@ -28,9 +28,8 @@ export default {
 
       for (let file of this.files) {
         const reader = new FileReader();
-        reader.onload = (e) => this.$emit("load", e.target.result);
-        reader.readAsText(file);
 
+        reader.readAsText(file);
         reader.onload = (fileObject) => {
           let questionsInJSON = this.convertJSONtoTXT(fileObject.target.result);
           complete_file[file.name.replace(".txt", "")] = questionsInJSON;
@@ -54,6 +53,7 @@ export default {
             answer: answer,
           });
       }
+      console.log(listQuestions);
       return listQuestions;
     },
   },
