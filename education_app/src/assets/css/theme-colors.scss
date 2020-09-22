@@ -1,0 +1,11 @@
+:root {
+    --app-background-color: #F5F5F5;
+    --app-color: #f5f5f5c0;
+    --questionJumbotron-color: #7A7A7A;
+}
+
+[theme="dark"] {
+    --app-background-color: #7A7A7A;
+    --app-color: #868686;
+    --questionJumbotron-color: #F5F5F5;
+}

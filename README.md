@@ -34,7 +34,7 @@ TODO
   - bootstrap - version 4.5.2
   - bootstrap-vue - version 2.16.0
   - vuex
-- HTML5/CSS
+- HTML5/CSS/SCSS
 
 ## Setup
 
@@ -47,16 +47,16 @@ TODO
 
 ## TODO
 
-
 - ~~fix bug: new line in answer is missing~~
 - ~~add possibility to upload question in JSON format~~
 - add validation for txt and json files
 - change paths and tests for BONUS files
 - add other readme with instructions for format text file
-- reformat css maybe change to SASS
+- ~~reformat css maybe change to SASS~~
+- ~~implement switch for theme~~
 - implement full server side in Django
 - implement users login/logout
-- create settings for CSS like "color mode" / if category of question should be displayed
+- create settings for category of question if it should be displayed
 - save user preferences in D
 
 ## Contact
