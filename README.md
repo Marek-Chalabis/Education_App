@@ -1,4 +1,4 @@
-# Displayer of notes(TODO add link to online version)
+# Notes Display(https://education-app-alpha.herokuapp.com/)
 
 > Web App for managing notes.
 
@@ -38,12 +38,16 @@ TODO
 
 ## Setup
 
-TODO
+```
+yarn install
+yarn serve
+```
 
 ## Features
 
 - fully working quiz on client side
 - .txt file converter to JSON with question and answer
+- switch for changing colors
 
 ## TODO
 
@@ -62,3 +66,23 @@ TODO
 ## Contact
 
 Created by <b>Marek Chałabis</b> email: chalabismarek@gmail.com
+
+TODO make it more clear
+
+### Compiles and minifies for production
+
+```
+yarn build
+```
+
+### Lints and fixes files
+
+```
+yarn lint
+```
+
+### Customize configuration
+
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
+# Education_App
