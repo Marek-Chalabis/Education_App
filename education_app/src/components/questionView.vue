@@ -1,55 +1,60 @@
 <template>
   <div>
-    <b-jumbotron bg-variant="rgb(80, 69, 65)" text-variant="white" border-variant="dark">
-      <div>
-        <b-container class="bv-example-row">
-          <b-row class="text-center">
-            <b-col>
-              <div>
-                <b-jumbotron>
-                  <template v-slot:header>
-                    <div
-                      v-if="currentQuestion.question === ''"
-                    >Upload your txt files and click 'Start'</div>
-                    <div v-else>{{ currentQuestion.question }}</div>
-                  </template>
-
+    <b-container class="bv-example-row">
+      <b-row class="text-center">
+        <b-col>
+          <div>
+            <b-jumbotron class="jumbotronForQuestions">
+              <template v-slot:header>
+                <div class="jumbotronForQuestionsHeader">
                   <div v-if="currentQuestion.question === ''">
-                    <br />
-                    <FileReader />
+                    Upload your txt files and click 'Start'
                   </div>
+                  <div v-else>{{ currentQuestion.question }}</div>
+                </div>
+              </template>
 
-                  <template v-slot:lead>
-                    <div
-                      v-if="currentQuestion.question !== ''"
-                    >Category: {{ currentQuestion.category }}</div>
-                  </template>
-
-                  <hr class="my-4" />
-
-                  <div v-if="displayAnswer === true" id="answer">{{ currentQuestion.answer }}</div>
-
-                  <b-button
-                    variant="primary"
-                    size="lg"
-                    class="mr-5"
-                    :disabled="
-                      currentQuestion.question === '' || displayAnswer === true
-                    "
-                    @click="showAnswer"
-                  >Answer</b-button>
-
-                  <b-button variant="success" size="lg" @click="showNextQuestion">
-                    <div v-if="currentQuestion.question === ''">Start</div>
-                    <div v-else>Next</div>
-                  </b-button>
-                </b-jumbotron>
+              <div v-if="currentQuestion.question === ''">
+                <br />
+                <FileReader />
               </div>
-            </b-col>
-          </b-row>
-        </b-container>
-      </div>
-    </b-jumbotron>
+
+              <template v-slot:lead>
+                <div v-if="currentQuestion.question !== ''">
+                  Category: {{ currentQuestion.category }}
+                </div>
+              </template>
+
+              <hr class="my-4" />
+
+              <div v-if="displayAnswer === true" id="answer">
+                {{ currentQuestion.answer }}
+              </div>
+
+              <b-button
+                variant="btnColorForAnswer"
+                size="lg"
+                class="mr-5"
+                :disabled="
+                  currentQuestion.question === '' || displayAnswer === true
+                "
+                @click="showAnswer"
+                >Answer</b-button
+              >
+
+              <b-button
+                variant="btnColorForStartAndNext"
+                size="lg"
+                @click="showNextQuestion"
+              >
+                <div v-if="currentQuestion.question === ''">Start</div>
+                <div v-else>Next</div>
+              </b-button>
+            </b-jumbotron>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -76,6 +81,7 @@ export default {
   },
   methods: {
     showNextQuestion() {
+      // TODO add check for empty currentQuestion and show error
       this.displayAnswer = false;
       const questions = this.questionsFromTxtFileInJsonFormat;
 
@@ -100,13 +106,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#answer {
-  border: 1px solid;
-  text-align: left;
-  white-space: pre-wrap;
-  padding: 4px;
-  margin-bottom: 10px;
-}
-</style>
