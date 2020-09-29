@@ -73,17 +73,15 @@
         ><div style="white-space: pre-wrap">
           {{ this.formsValidationInfo }}
         </div>
-      </b-form-invalid-feedback> </b-modal
-    ><a
-      :href="item.url"
-      v-text="item.label"
-      @click.prevent="downloadItem(item)"
-    />
+      </b-form-invalid-feedback>
+    </b-modal>
   </div>
 </template>
 
-
 <script>
+import downloadNotes from "@/mixins/downloadNotes.js";
+import transformNotesInJsonToTxt from "@/mixins/transformNotesInJsonToTxt.js";
+
 export default {
   data() {
     return {
@@ -102,8 +100,11 @@ export default {
           answerState: null,
         },
       ],
+
+      questionsFromFormInJson: {},
     };
   },
+  mixins: [downloadNotes, transformNotesInJsonToTxt],
   methods: {
     checkFormValidity() {
       this.formsValidationInfo = "";
@@ -140,11 +141,15 @@ export default {
       this.$nextTick(() => {
         this.$bvModal.hide("notesPopup");
       });
-      // TODO make it global and add after implmenting back end
-      const objk = {};
-      objk[this.category] = this.allQuestions;
-      const objJSON = JSON.parse(objk);
-      console.log(objJSON);
+      // TODO change it/implement for users profile after implementing back end
+      const objQuestions = {};
+      objQuestions[this.category] = this.allQuestions;
+      this.questionsFromFormInJson = JSON.stringify(objQuestions);
+      this.downloadNotes(this.questionsFromFormInJson, "json");
+      this.downloadNotes(
+        this.transformNotesInJsonToTxt(this.questionsFromFormInJson),
+        "txt"
+      );
     },
     handleOk(bvModalEvt) {
       bvModalEvt.preventDefault();
@@ -184,19 +189,6 @@ export default {
     deleteQuestion(counter) {
       this.allQuestions.splice(counter, 1);
     },
-  },
-  downloadItem({ url, label }) {
-    axios
-      .get(url, { responseType: "blob" })
-      .then((response) => {
-        const blob = new Blob([response.data], { type: "application/pdf" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = label;
-        link.click();
-        URL.revokeObjectURL(link.href);
-      })
-      .catch(console.error);
   },
 };
 </script>
