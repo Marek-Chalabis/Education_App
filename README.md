@@ -15,7 +15,7 @@
 
 ## General info
 
-The project allows user to manage notes. It Display them in the browser in the form of the quiz. Client provides .txt file and app will convert it to notes and questions.
+The project allows user to manage notes. It Display them in the browser in the form of the quiz. Client provides .txt/.json file and app will convert it to notes and questions.
 
 \*\* <b>Project still under the development</b>
 
@@ -45,8 +45,8 @@ yarn serve
 
 ## Features
 
-- fully working quiz on client side
-- .txt file converter to JSON with question and answer
+- fully working quiz on client side it uses JSON and txt files
+- user can create his own notes/question on frontend
 - switch for changing colors
 
 ## TODO
@@ -67,6 +67,7 @@ yarn serve
 
 Created by <b>Marek Chałabis</b> email: chalabismarek@gmail.com
 
+<!--
 TODO make it more clear
 
 ### Compiles and minifies for production
@@ -77,7 +78,7 @@ yarn build
 
 ### Lints and fixes files
 
-```
+```      const questions = fileAsObject[category];
 yarn lint
 ```
 
@@ -85,4 +86,4 @@ yarn lint
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-# Education_App
+# Education_App -->
