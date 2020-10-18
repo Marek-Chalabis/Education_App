@@ -39,8 +39,8 @@ TODO
 ## Setup
 
 ```
-yarn install
-yarn serve
+  yarn install
+  yarn serve
 ```
 
 ## Features
